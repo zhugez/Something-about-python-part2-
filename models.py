@@ -23,10 +23,11 @@ Session = sessionmaker(bind=engine)
 session = Session()
 user = Person(name='Ly Ngoc VU', email='john@example.com',
               picture='http://www.example.com/')
-session.add(user)
-session.commit()
-session.delete(user)
-users = session.query(Person).all()
-for user in users:
-    print(user.name)
-session.close()
+with session:
+    session.add(user)
+    # session.commit()
+# session.delete(user)
+    users = session.query(Person).all()
+    for user in users:
+        print(f"USER ID: {user.id}, Name: {user.name}")
+# session.close()
