@@ -21,13 +21,26 @@ engine = create_engine("sqlite:///users.db", echo=True)
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
-user = Person(name='Ly Ngoc VU', email='john@example.com',
-              picture='http://www.example.com/')
+userList = []
+
+user = Person(name='Nguyễn Văn A ', email='DASAS@gmail.com',picture='https://localhost:5000/static/images/avatar.png')
+
+user2 = Person(name='Nguyễn Văn B ', email='DASAS@gmail.com',picture='https://localhost:5000/static/images/avatar.png')
+
+user3 = Person(name='Nguyễn Văn C ', email='DASAS@gmail.com',picture='https://localhost:5000/static/images/avatar.png')
+
+user4 = Person(name='Lý Ngọc Vũ ', email='DASAS@gmail.com',picture='https://localhost:5000/static/images/avatar.png')
+userList.append(user)
+userList.append(user2)
+userList.append(user3)
+userList.append(user4)
 with session:
-    session.add(user)
-    # session.commit()
-# session.delete(user)
+    for user in userList:
+        session.add(user)
+    data= session.query(Person).all()
+    session.delete(data)
     users = session.query(Person).all()
-    for user in users:
-        print(f"USER ID: {user.id}, Name: {user.name}")
+for user in users:
+    print(f"USER ID: {user.id}, Name: {user.name}" if user.name != null else "NULL")
+# session.commit()
 # session.close()
